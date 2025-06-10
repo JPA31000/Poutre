@@ -114,3 +114,17 @@ main {
 }
 #toast.success { background-color: var(--success-color); }
 #toast.error { background-color: var(--danger-color); }
+
+@media (max-width: 600px) {
+  main {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "results"
+      "section"
+      "diagrams";
+  }
+
+  .card {
+    width: 100%;
+  }
+}
