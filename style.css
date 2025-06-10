@@ -1,0 +1,116 @@
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --bg-light: #f0f2f5; /* Fond légèrement plus texturé */
+  --bg-white: #ffffff;
+  --text-dark: #212529;
+  --text-light: #6c757d;
+  --border-color: #dee2e6;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --shadow: 0 4px 12px rgba(0,0,0,0.08); /* Ombre plus douce */
+  --shadow-hover: 0 6px 16px rgba(0,0,0,0.12);
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased; /* Meilleur rendu des polices */
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+header {
+  background: var(--primary-color);
+  color: var(--bg-white);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+  z-index: 10;
+}
+header h1 { margin: 0; font-size: 1.5em; font-weight: 500; }
+main {
+  flex-grow: 1; padding: 20px; display: grid;
+  grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr;
+  gap: 20px;
+  grid-template-areas: "results section" "diagrams diagrams";
+}
+.card {
+  background: var(--bg-white); border: 1px solid var(--border-color);
+  padding: 20px; border-radius: 8px; box-shadow: var(--shadow);
+  display: flex; flex-direction: column;
+  transition: all 0.3s ease; /* NOUVEAU : Transition pour le survol */
+}
+.card:hover {
+  transform: translateY(-4px); /* NOUVEAU : Effet de lévitation */
+  box-shadow: var(--shadow-hover);
+}
+.card h2 {
+  margin-top: 0; font-size: 1.2em; color: var(--primary-color);
+  border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;
+}
+#results-card { grid-area: results; }
+#section-card { grid-area: section; }
+#diagrams-card { grid-area: diagrams; }
+#section-canvas-container, #diagrams-canvas-container { flex-grow: 1; min-height: 250px; }
+
+/* NOUVEAU : Amélioration de la liste de résultats avec grille et icônes */
+#results-content ul {
+  list-style: none; padding-left: 0;
+  display: grid;
+  grid-template-columns: auto 1fr; /* Colonne icône, colonne texte */
+  gap: 12px 8px;
+  align-items: center;
+}
+#results-content li {
+  grid-column: 1 / -1; /* Les titres prennent toute la largeur */
+  display: contents; /* Permet aux enfants d'être des items de la grille */
+}
+#results-content li::before {
+  font-family: 'Arial';
+  font-weight: bold;
+  width: 24px; height: 24px; border-radius: 50%;
+  display: inline-flex; justify-content: center; align-items: center;
+  color: white;
+}
+#results-content .res-label { font-weight: 500; }
+#results-content .res-value { font-family: monospace; font-size: 1.1em; }
+#results-content .res-ok::before { content: '✓'; background: var(--success-color); }
+#results-content .res-ko::before { content: '!'; background: var(--danger-color); }
+#results-content .res-info::before { content: 'i'; background: var(--secondary-color); }
+
+.modal-overlay, .modal-content, button { /* ... Styles de la modale inchangés ... */ }
+/* ... (Le reste du style de la modale et des boutons reste identique) ... */
+
+/* NOUVEAU : Style pour la notification "Toast" */
+#toast {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1001;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 17px;
+  opacity: 0;
+  transition: visibility 0s 0.5s, opacity 0.5s, bottom 0.5s;
+}
+#toast.show {
+  visibility: visible;
+  opacity: 1;
+  bottom: 50px;
+  transition: visibility 0s, opacity 0.5s, bottom 0.5s;
+}
+#toast.success { background-color: var(--success-color); }
+#toast.error { background-color: var(--danger-color); }
