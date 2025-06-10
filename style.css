@@ -84,6 +84,8 @@ main {
 #results-content .res-ok::before { content: '✓'; background: var(--success-color); }
 #results-content .res-ko::before { content: '!'; background: var(--danger-color); }
 #results-content .res-info::before { content: 'i'; background: var(--secondary-color); }
+#results-content .res-ok .res-value { color: var(--success-color); font-weight: bold; }
+#results-content .res-ko .res-value { color: var(--danger-color); font-weight: bold; }
 
 
 .modal-overlay {
