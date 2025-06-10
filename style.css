@@ -114,3 +114,6 @@ main {
 }
 #toast.success { background-color: var(--success-color); }
 #toast.error { background-color: var(--danger-color); }
+
+/* Hide modal overlay by default */
+#modal { display: none; }

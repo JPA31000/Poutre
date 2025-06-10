@@ -42,10 +42,10 @@ function setupDOM() {
       calculer();
       btnApply.innerHTML = "Appliquer & Calculer";
       btnApply.disabled = false;
+      modal.style.display = 'none';
     }, 50); // Léger délai pour permettre au DOM de se rafraîchir
   };
   window.onclick = (event) => { if (event.target == modal) modal.style.display = 'none'; };
-  modal.style.display = 'flex';
 }
 
 function calculer() {
